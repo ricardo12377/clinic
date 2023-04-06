@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400&display=swap');
+
+$color-purple: #24224b;
+$color-white: #fff;
+
+.light {
+  margin: 0;
+  padding: 0;
+  font-family: 'IBM Plex Sans', sans-serif;
+  background-color: $color-white;
+  color: $color-purple;
+  width: 100vw;
+  height: 100vh;
+}
+
+.dark {
+  margin: 0;
+  padding: 0;
+  font-family: 'IBM Plex Sans', sans-serif;
+  background-color: $color-purple;
+  color: $color-white;
+  width: 100vw;
+  height: 100vh;
+}

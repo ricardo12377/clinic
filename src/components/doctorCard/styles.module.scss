@@ -1,0 +1,23 @@
+.card {
+  width: 90%;
+  height: 90px;
+  background-color: #fff;
+  color: #24224b;
+  border: 1.5px solid #fff;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  margin-top: 15px;
+
+  button {
+    margin-top: 5px;
+    border: 2px solid #24224b;
+    border-radius: 4px;
+    background-color: #fff;
+    width: 200px;
+    height: 30px;
+  }
+}
