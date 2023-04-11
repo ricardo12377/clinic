@@ -8,11 +8,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'GET') {
-    if (req.query) {
+    if (req.body) {
       try {
         const doctors = await prisma.consult.findMany({
           where: {
-            doctorId: req.query
+            doctorId: req.body.data.doctorId
           }
         });
         res.json(doctors);

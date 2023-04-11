@@ -4,14 +4,14 @@ import styles from './styles.module.scss';
 import { DoctorCard } from '@app/components/doctorCard';
 import { useAppDispatch, useAppSelector } from '@app/hooks/hooks';
 import { getAllConsults, getAllUsers } from '@app/store/modules/clinic/thunks';
-import axios from 'axios';
+import { ConsultCard } from '@app/components/consultCard';
 
 export const Dashboard: FC = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector(state => state.clinic);
 
   useEffect(() => {
-    // dispatch(getAllConsults({ id: null }));
+    dispatch(getAllConsults());
     dispatch(getAllUsers());
   }, []);
 
@@ -33,7 +33,19 @@ export const Dashboard: FC = () => {
               );
             })}
           </aside>
-          <section className={styles.list}> list here</section>
+          <section className={styles.list}>
+            {data.consults.map((consult, index) => {
+              return (
+                <ConsultCard
+                  key={index + consult.id + consult.doctorId}
+                  id={consult.id}
+                  doctorId={consult.doctorId}
+                  title={consult.title}
+                  obs={consult.obs}
+                />
+              );
+            })}
+          </section>
         </div>
       </div>
     </LayoutProvider>

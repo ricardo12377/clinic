@@ -17,12 +17,11 @@ export default async function handler(
   }
 
   if (req.method === 'POST') {
-    const { name, email, isActive } = req.body;
+    const { name, email } = req.body;
     const doctor = await prisma.doctor.create({
       data: {
         name,
-        email,
-        isActive
+        email
       }
     });
     res.json(doctor);
