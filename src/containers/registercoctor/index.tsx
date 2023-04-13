@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import { z } from 'zod';
 import { useAppDispatch } from '@app/hooks/hooks';
 import { api } from '@app/service/api';
+import { createDoctor } from '@app/store/modules/clinic/thunks';
 
 export const RegisterDoctorCotainer: FC = () => {
   const [state, setState] = useState({
@@ -18,25 +19,35 @@ export const RegisterDoctorCotainer: FC = () => {
   };
 
   const handleSubmit = (e: any) => {
-    e.preventDefault();
-    api.post('/api/user/', {
-      name: state.name,
-      email: state.email
-    });
+    createDoctor({ name: state.name, email: state.email });
+
+    e.target.reset();
   };
 
   return (
     <LayoutProvider>
-      <div className={styles.container}>
+      <div className={styles.container} data-testid="testing">
         <form onSubmit={handleSubmit}>
           <h1>Cadastrar Doutor</h1>
           <label htmlFor="name">Nome</label>
-          <input name="name" onChange={handleChange} />
+          <input
+            name="name"
+            onChange={handleChange}
+            type="text"
+            data-testid="name"
+          />
 
           <label htmlFor="email">Email</label>
-          <input name="email" onChange={handleChange} />
+          <input
+            name="email"
+            onChange={handleChange}
+            type="text"
+            data-testid="email"
+          />
 
-          <button type="submit">Cadastrar</button>
+          <button type="submit" data-testid="button">
+            Cadastrar
+          </button>
         </form>
       </div>
     </LayoutProvider>

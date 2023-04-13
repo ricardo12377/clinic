@@ -25,10 +25,22 @@ export interface GetUsersStatus {
   status: string;
 }
 
+export interface CreateConsults {
+  error: unknown;
+  status: string;
+}
+
+export interface CreateDoctor {
+  error: unknown;
+  status: string;
+}
+
 export interface UserSlice {
   user: User;
   consults: Consult[];
   getConsultsStatus: GetConsultsStatus;
   getUsersStatus: GetUsersStatus;
+  createConsult: CreateConsults;
+  createDoctor: CreateDoctor;
   users: User[];
 }

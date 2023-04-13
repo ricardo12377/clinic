@@ -15,3 +15,39 @@ export const getAllUsers = createAsyncThunk('users/geetAllUsers', async () => {
 
   return response.data;
 });
+
+export const createDoctor = createAsyncThunk(
+  'users/createDoctor',
+  async ({ name, email }: { name: string; email: string }) => {
+    const response = await api.post('/api/doctor', {
+      name,
+      email
+    });
+
+    return response.data;
+  }
+);
+
+export const createConsult = createAsyncThunk(
+  'consult/createConsult',
+  async ({
+    title,
+    obs,
+    client,
+    doctorId
+  }: {
+    title: string;
+    obs?: string;
+    client: string;
+    doctorId: string;
+  }) => {
+    const response = await api.post('/api/consult', {
+      title,
+      obs,
+      client,
+      doctorId
+    });
+
+    return response.data;
+  }
+);

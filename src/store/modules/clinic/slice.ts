@@ -1,7 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Consult, User, UserSlice } from './props';
-import { getAllConsults, getAllUsers } from './thunks';
+import {
+  createConsult,
+  createDoctor,
+  getAllConsults,
+  getAllUsers
+} from './thunks';
 
 const initialState: UserSlice = {
   user: {} as User,
@@ -12,6 +17,14 @@ const initialState: UserSlice = {
     status: 'idle'
   },
   getUsersStatus: {
+    error: '',
+    status: 'idle'
+  },
+  createConsult: {
+    error: '',
+    status: 'idle'
+  },
+  createDoctor: {
     error: '',
     status: 'idle'
   }
@@ -58,6 +71,26 @@ export const clinicSlicer = createSlice({
       .addCase(getAllUsers.rejected, (state: UserSlice, action) => {
         state.getUsersStatus.status = 'failed';
         state.getUsersStatus.error = action.error?.message;
+      })
+      .addCase(createDoctor.pending, (state: UserSlice) => {
+        state.createDoctor.status = 'loading';
+      })
+      .addCase(createDoctor.fulfilled, (state: UserSlice) => {
+        state.createDoctor.status = 'succeeded';
+      })
+      .addCase(createDoctor.rejected, (state: UserSlice, action) => {
+        state.createDoctor.status = 'failed';
+        state.createDoctor.error = action.error?.message;
+      })
+      .addCase(createConsult.pending, (state: UserSlice) => {
+        state.createConsult.status = 'loading';
+      })
+      .addCase(createConsult.fulfilled, (state: UserSlice) => {
+        state.createConsult.status = 'succeeded';
+      })
+      .addCase(createConsult.rejected, (state: UserSlice, action) => {
+        state.createConsult.status = 'failed';
+        state.createConsult.error = action.error?.message;
       });
   }
 });
