@@ -28,4 +28,17 @@ export default async function handler(
       }
     }
   }
+
+  if (req.method === 'POST') {
+    const { title, obs, client, doctorId } = req.body;
+    const doctor = await prisma.consult.create({
+      data: {
+        title,
+        obs,
+        client,
+        doctorId
+      }
+    });
+    res.json(doctor);
+  }
 }

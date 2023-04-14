@@ -1,5 +1,5 @@
 import { LayoutProvider } from '@app/components/layoutProvider';
-import React, { FC, useState } from 'react';
+import React, { FC, FormEvent, useRef, useState } from 'react';
 import styles from './styles.module.scss';
 import { z } from 'zod';
 import { useAppDispatch } from '@app/hooks/hooks';
@@ -12,27 +12,31 @@ export const RegisterDoctorCotainer: FC = () => {
     email: ''
   });
 
+  const formRef = useRef<HTMLFormElement>(null);
+
   const dispatch = useAppDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: any) => {
-    createDoctor({ name: state.name, email: state.email });
+  const handleSubmit = () => {
+    dispatch(createDoctor({ name: state.name, email: state.email }));
 
-    e.target.reset();
+    formRef.current?.reset();
   };
 
   return (
     <LayoutProvider>
       <div className={styles.container} data-testid="testing">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} ref={formRef}>
           <h1>Cadastrar Doutor</h1>
           <label htmlFor="name">Nome</label>
           <input
             name="name"
-            onChange={handleChange}
+            onChange={e => {
+              console.log(e);
+            }}
             type="text"
             data-testid="name"
           />

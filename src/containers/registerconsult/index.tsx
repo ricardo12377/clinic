@@ -1,8 +1,8 @@
 import { LayoutProvider } from '@app/components/layoutProvider';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import styles from './styles.module.scss';
-import { useAppDispatch } from '@app/hooks/hooks';
-import { createConsult } from '@app/store/modules/clinic/thunks';
+import { useAppDispatch, useAppSelector } from '@app/hooks/hooks';
+import { createConsult, getAllUsers } from '@app/store/modules/clinic/thunks';
 
 export const RegisterConsultContainer: FC = () => {
   const [state, setState] = useState({
@@ -12,29 +12,36 @@ export const RegisterConsultContainer: FC = () => {
     doctorId: ''
   });
 
+  const formRef = useRef<HTMLFormElement>(null);
+
   const dispatch = useAppDispatch();
+  const doctors = useAppSelector(state => state.clinic.users);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (
-    e: any | React.ChangeEventHandler<HTMLSelectElement>
-  ) => {
-    createConsult({
-      title: state.title,
-      obs: state.obs,
-      client: state.client,
-      doctorId: state.doctorId
-    });
+  const handleSubmit = () => {
+    dispatch(
+      createConsult({
+        title: state.title,
+        obs: state.obs,
+        client: state.client,
+        doctorId: state.doctorId
+      })
+    );
 
-    e.target.reset();
+    formRef.current?.reset();
   };
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, []);
 
   return (
     <LayoutProvider>
       <div className={styles.container} data-testid="testing">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} ref={formRef}>
           <h1>Cadastrar Doutor</h1>
           <label htmlFor="title">Titulo</label>
           <input
@@ -60,7 +67,7 @@ export const RegisterConsultContainer: FC = () => {
             data-testid="client"
           />
 
-          <label htmlFor="doctorId">Selecione o Dr.:</label>
+          <label htmlFor="doctorId">Selecione o Dr:</label>
           <select
             name="doctorId"
             data-testid="doctorId"
@@ -68,10 +75,13 @@ export const RegisterConsultContainer: FC = () => {
               setState({ ...state, doctorId: e.target.value });
             }}
           >
-            <option value="12sds2s" selected>
-              Dr Ricardo
-            </option>
-            <option value="12sds22sksjs">Dr Souza</option>
+            {doctors.map((doctor, index) => {
+              return doctor.isActive ? (
+                <option value={doctor.id} key={index + doctor.id}>
+                  {doctor.name}
+                </option>
+              ) : null;
+            })}
           </select>
 
           <button type="submit" data-testid="button">

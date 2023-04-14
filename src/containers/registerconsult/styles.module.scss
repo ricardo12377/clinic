@@ -10,7 +10,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 400px;
+    height: 500px;
     width: 500px;
     background-color: #fff;
     color: black;
@@ -28,5 +28,10 @@
     border-radius: 4px;
     width: 150px;
     height: 30px;
+  }
+
+  input,
+  select {
+    width: 80%;
   }
 }
