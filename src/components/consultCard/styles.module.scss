@@ -1,12 +1,27 @@
 .consultCard {
-  width: 700px;
+  width: 500px;
   margin-top: 10px;
   height: 100px;
   background-color: #fff;
   color: #24224b;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   border-radius: 4px;
+  font-size: 18px;
+  padding-left: 5px;
+
+  button {
+    position: relative;
+    top: 10px;
+    left: 420px;
+    background-color: #24224b;
+    color: #fff;
+  }
+}
+
+.client {
+  border-bottom: 1px solid #24224b;
+  width: 100%;
 }

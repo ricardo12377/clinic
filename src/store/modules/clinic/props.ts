@@ -35,6 +35,11 @@ export interface CreateDoctor {
   status: string;
 }
 
+export interface DeleteConsult {
+  error: string | undefined;
+  status: string;
+}
+
 export interface UserSlice {
   user: User;
   consults: Consult[];
@@ -43,4 +48,5 @@ export interface UserSlice {
   createConsult: CreateConsults;
   createDoctor: CreateDoctor;
   users: User[];
+  deleteConsult: DeleteConsult;
 }

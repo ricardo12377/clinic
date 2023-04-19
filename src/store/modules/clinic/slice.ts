@@ -4,6 +4,7 @@ import { Consult, User, UserSlice } from './props';
 import {
   createConsult,
   createDoctor,
+  deleteConsult,
   getAllConsults,
   getAllUsers
 } from './thunks';
@@ -25,6 +26,10 @@ const initialState: UserSlice = {
     status: 'idle'
   },
   createDoctor: {
+    error: '',
+    status: 'idle'
+  },
+  deleteConsult: {
     error: '',
     status: 'idle'
   }
@@ -91,6 +96,9 @@ export const clinicSlicer = createSlice({
       .addCase(createConsult.rejected, (state: UserSlice, action) => {
         state.createConsult.status = 'failed';
         state.createConsult.error = action.error?.message;
+      })
+      .addCase(deleteConsult.fulfilled, (state: UserSlice) => {
+        state.deleteConsult.status = 'fulfilled';
       });
   }
 });

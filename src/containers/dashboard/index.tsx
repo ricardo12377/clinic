@@ -5,6 +5,7 @@ import { DoctorCard } from '@app/components/doctorCard';
 import { useAppDispatch, useAppSelector } from '@app/hooks/hooks';
 import { getAllConsults, getAllUsers } from '@app/store/modules/clinic/thunks';
 import { ConsultCard } from '@app/components/consultCard';
+import Link from 'next/link';
 
 export const Dashboard: FC = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +19,16 @@ export const Dashboard: FC = () => {
   return (
     <LayoutProvider>
       <div className={styles.container}>
-        <nav className={styles.navigation}>something here</nav>
+        <nav className={styles.navigation}>
+          <ul>
+            <Link href="/registerdoctor" className={styles.link}>
+              <li id="registerDoctor">Cadastrar Doutor</li>
+            </Link>
+            <Link href="/registerconsult" className={styles.link}>
+              <li id="registerConsult">Cadastrar Consulta</li>
+            </Link>
+          </ul>
+        </nav>
 
         <div className={styles.content}>
           <aside className={styles.menu}>
@@ -42,6 +52,7 @@ export const Dashboard: FC = () => {
                   doctorId={consult.doctorId}
                   title={consult.title}
                   obs={consult.obs}
+                  client={consult.client}
                 />
               );
             })}

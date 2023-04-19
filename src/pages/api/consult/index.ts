@@ -41,4 +41,20 @@ export default async function handler(
     });
     res.json(doctor);
   }
+
+  if (req.method === 'DELETE') {
+    const id = req.query.id;
+
+    try {
+      const deleted = prisma.consult.delete({
+        where: {
+          id: String(id)
+        }
+      });
+
+      res.status(200).json(deleted);
+    } catch (error) {
+      res.status(500).json({ message: error });
+    }
+  }
 }

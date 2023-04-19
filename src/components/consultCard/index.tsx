@@ -1,18 +1,14 @@
 import { FC } from 'react';
 import styles from './styles.module.scss';
+import { ConsultCardProps } from './props';
 
-export interface ConsultCardProps {
-  id: string;
-  doctorId: string;
-  obs?: string;
-  title: string;
-}
-
-export const ConsultCard: FC<ConsultCardProps> = ({ obs, title }) => {
+export const ConsultCard: FC<ConsultCardProps> = ({ obs, title, client }) => {
   return (
-    <div className={styles.consultCard}>
-      <div>{title}</div>
-      <div>{obs}</div>
+    <div className={styles.consultCard} data-testid="consult-card">
+      <button>Excluir</button>
+      <div className={styles.client}>{client}</div>
+      <div className={styles.title}>{title}</div>
+      <div className={styles.obs}>{obs}</div>
     </div>
   );
 };

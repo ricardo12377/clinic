@@ -19,7 +19,7 @@ export const getAllUsers = createAsyncThunk('users/geetAllUsers', async () => {
 export const createDoctor = createAsyncThunk(
   'users/createDoctor',
   async ({ name, email }: { name: string; email: string }) => {
-    const response = await api.post('/api/doctor', {
+    const response = await api.post('/api/user', {
       name,
       email
     });
@@ -47,6 +47,15 @@ export const createConsult = createAsyncThunk(
       client,
       doctorId
     });
+
+    return response.data;
+  }
+);
+
+export const deleteConsult = createAsyncThunk(
+  'consult/deleteconsult',
+  async ({ clientId }: { clientId: string }) => {
+    const response = await api.delete(`/api/consult/${clientId}`);
 
     return response.data;
   }
