@@ -4,7 +4,11 @@ import { ConsultCardProps } from './props';
 
 export const ConsultCard: FC<ConsultCardProps> = ({ obs, title, client }) => {
   return (
-    <div className={styles.consultCard} data-testid="consult-card">
+    <div
+      className={styles.consultCard}
+      data-testid="consult-card"
+      id="consultCard"
+    >
       <button>Excluir</button>
       <div className={styles.client}>{client}</div>
       <div className={styles.title}>{title}</div>

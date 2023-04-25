@@ -6,10 +6,13 @@ import { createConsult, getAllUsers } from '@app/store/modules/clinic/thunks';
 import { useFormik } from 'formik';
 import { schema } from './schema';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export const RegisterConsultContainer: FC = () => {
   const dispatch = useAppDispatch();
   const doctors = useAppSelector(state => state.clinic.users);
+
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -30,6 +33,8 @@ export const RegisterConsultContainer: FC = () => {
       );
 
       resetForm();
+
+      router.push('/');
     }
   });
 
