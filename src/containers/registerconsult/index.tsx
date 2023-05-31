@@ -46,7 +46,7 @@ export const RegisterConsultContainer: FC = () => {
     <LayoutProvider>
       <div className={styles.container} data-testid="testing">
         <form onSubmit={formik.handleSubmit}>
-          <h1>Cadastrar Doutor</h1>
+          <h1>Cadastrar Consulta</h1>
           <label htmlFor="title">Titulo</label>
           <input
             name="title"
@@ -54,6 +54,7 @@ export const RegisterConsultContainer: FC = () => {
             type="text"
             data-testid="title"
           />
+          <p>{formik.errors.title}</p>
 
           <label htmlFor="obs">Obs:</label>
           <input
@@ -70,13 +71,17 @@ export const RegisterConsultContainer: FC = () => {
             type="text"
             data-testid="client"
           />
+          <p>{formik.errors.client}</p>
 
           <label htmlFor="doctorId">Selecione o Dr:</label>
           <select
             name="doctorId"
             data-testid="doctorId"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.doctorId}
           >
+            <option>Selecione</option>;
             {doctors.map((doctor, index) => {
               return doctor.isActive ? (
                 <option value={doctor.id} key={index + doctor.id}>
@@ -85,6 +90,7 @@ export const RegisterConsultContainer: FC = () => {
               ) : null;
             })}
           </select>
+          <p>{formik.errors.doctorId}</p>
 
           <div className={styles.groupButtons}>
             <Link href="/">
